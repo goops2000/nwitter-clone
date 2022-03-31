@@ -2,10 +2,25 @@ import React, { useState } from "react";
 import { authService } from "fbase";
 
 import AppRouter from "./Router";
+import { useEffect } from "react";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
-  return <AppRouter isLoggedIn={isLoggedIn} />;
+  const [init, setInit] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+    });
+  }, []);
+
+  return (
+    <>{init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing...."}</>
+  );
 }
 
 export default App;
