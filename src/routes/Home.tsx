@@ -1,11 +1,5 @@
 import { dbService } from "fbase";
-import {
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-  QuerySnapshot,
-} from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { DocumentData } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
@@ -25,12 +19,6 @@ function Home() {
         id: doc.id,
       };
       setNweets((prev) => [dbNweets, ...prev]);
-    });
-    const getNweetsArray = querySnapshot.docs.map((doc) => {
-      return {
-        key: doc.id,
-        data: doc.data().nweet,
-      };
     });
   };
 
