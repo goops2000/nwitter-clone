@@ -18,6 +18,7 @@ function Home() {
         data: doc.data().nweet,
         id: doc.id,
       };
+      console.log(dbNweets);
       setNweets((prev) => [dbNweets, ...prev]);
     });
   };
